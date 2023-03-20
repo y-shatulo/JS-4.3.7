@@ -71,6 +71,7 @@ body {
     bottom: 33%;
     right: 35px;
     border: none;
+    cursor: pointer;
     background: url('img/Vector\ 7.svg'),
                 url('img/Vector\ 8.svg'), 
                 no-repeat;
