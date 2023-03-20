@@ -5,6 +5,8 @@ const savedRepositories = document.querySelector('.saved-repositories');
 const btnDelete = createElement('button', 'btn-delete');
 let result;
 
+const startSearch = debounce(searchRepository, 500);
+
 inputWrapper.append(input);
 inputWrapper.append(selectRepositories);
 
@@ -24,8 +26,6 @@ savedRepositories.addEventListener('click', (e) => {
         target.parentElement.remove();
     }
 })
-
-const startSearch = debounce(searchRepository, 500);
 
 function createElement(tagName, tagClass) {
     const element = document.createElement(tagName);
@@ -61,9 +61,7 @@ async function searchRepository() {
             result = response.items;
 
             if (input.value == '') {
-                item.forEach((el) => {
-                    el.remove();
-                });
+                selectRepositories.textContent = '';
                 return;
             }
 
@@ -81,7 +79,7 @@ async function searchRepository() {
                 });
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log('repositories not found'));
 }
 
 function saveInfo(item, el) {
